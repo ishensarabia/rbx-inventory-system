@@ -81,6 +81,10 @@ end
 	@description Returns the player's data.
 ]=]
 function DataService:GetData(player: Player)
+	-- Wait for the profile to load:
+	while Profiles[player] == nil do
+		task.wait()
+	end
 	return Profiles[player].Data
 end
 
