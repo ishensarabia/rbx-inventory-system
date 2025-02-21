@@ -12,13 +12,10 @@ function InventoryController:KnitStart()
     local function observeInventoryItems(inventoryItems: table)
         print("Inventory changed: ", inventoryItems )
         self.InventoryChanged:Fire(inventoryItems)
-         
     end
 
 	local InventoryService = Knit.GetService("InventoryService")
-	InventoryService:GetPlayerInventory():andThen(function(inventory)
-		print("Inventory: ", inventory)
-	end)
+	InventoryService:GetPlayerInventory():andThen(observeInventoryItems)
 end
 
 function InventoryController:KnitInit() end

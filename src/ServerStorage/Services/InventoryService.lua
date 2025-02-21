@@ -42,7 +42,13 @@ function InventoryService:AddItem(player: Player, item: Item)
 end
 
 function InventoryService:KnitStart()
-	print("InventoryService started")
+	task.delay(5, function()
+		self:AddItem(Players.Sci_Punk, {
+			Name = "Sword",
+			Description = "A sharp sword"
+		})
+		print("Added item to player's inventory")
+	end)
 end
 
 function InventoryService:KnitInit()
