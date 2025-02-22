@@ -14,7 +14,7 @@ local PROFILE_TEMPLATE = {
 	Items = {},
 }
 
-local PlayerStore = ProfileStore.New("PlayerStore", PROFILE_TEMPLATE)
+local PlayerStore = ProfileStore.New("PlayerStore5", PROFILE_TEMPLATE)
 local Profiles: { [player]: typeof(PlayerStore:StartSessionAsync()) } = {}
 
 local DataService = Knit.CreateService({
@@ -43,7 +43,6 @@ local function PlayerAdded(player: Player)
 
 		if player.Parent == Players then
 			Profiles[player] = profile
-			print(`Profile loaded for {player.DisplayName}!`)
 		else
 			-- The player has left before the profile session started
 			profile:EndSession()
@@ -57,7 +56,6 @@ end
 function DataService:KnitInit() end
 
 function DataService:KnitStart()
-	print("DataService started")
 	-- In case Players have joined the server earlier than this script ran:
 	for _, player in Players:GetPlayers() do
 		task.spawn(PlayerAdded, player)
