@@ -8,18 +8,15 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 
 -- Initialize services & components
 for _, service in (ServerStorage.Source.Services:GetDescendants()) do
-    if service:IsA("ModuleScript") and service.Name:match(".+Service$") then
-        require(service)
-    end
+	if service:IsA("ModuleScript") and service.Name:match(".+Service$") then
+		require(service)
+	end
 end
 
 for _, component in (ServerStorage.Source.Components:GetDescendants()) do
-    if component:IsA("ModuleScript") then
-        require(component)
-    end
+	if component:IsA("ModuleScript") then
+		require(component)
+	end
 end
 
-Knit.Start():andThen(function()
-    -- print("Knit server started")
-end):catch(warn)
-
+Knit.Start():andThen(function() end):catch(warn)
