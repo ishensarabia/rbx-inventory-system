@@ -26,8 +26,7 @@ export type Item = {
 ]=]
 function InventoryService:GetPlayerInventory(player: Player)
 	local playerData = self._DataStoreService:GetData(player)
-	warn("Fetched player data: ", playerData)
-	return playerData
+	return playerData.Items
 end
 
 function InventoryService.Client:GetPlayerInventory(player: Player)
@@ -42,18 +41,11 @@ function InventoryService:AddItem(player: Player, item: Item)
 end
 
 function InventoryService:KnitStart()
-	task.delay(5, function()
-		self:AddItem(Players.Sci_Punk, {
-			Name = "Sword",
-			Description = "A sharp sword"
-		})
-		print("Added item to player's inventory")
-	end)
+	
 end
 
 function InventoryService:KnitInit()
 	self._DataStoreService = Knit.GetService("DataService")
-	print("InventoryService initialized")
 end
 
 return InventoryService
