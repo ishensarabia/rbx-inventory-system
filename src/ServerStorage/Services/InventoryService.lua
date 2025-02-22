@@ -40,6 +40,22 @@ function InventoryService:AddItem(player: Player, item: Item)
 	self.Client.InventoryChanged:Fire(player, playerData.Items)
 end
 
+function InventoryService:RemoveItem(player: Player, item: Item)
+	local playerData = self._DataStoreService:GetData(player)
+	for i, v in (playerData.Items) do
+		if v.GUID == item.GUID then
+			table.remove(playerData.Items, i)
+			break
+		end
+	end
+	self._DataStoreService:UpdateProfileKeyValue(player, "Items", playerData.Items)
+	self.Client.InventoryChanged:Fire(player, playerData.Items)
+end
+
+function InventoryService.Client:RemoveItem(player: Player, item: Item)
+	self.Server:RemoveItem(player, item)
+end
+
 function InventoryService:KnitStart()
 	
 end
